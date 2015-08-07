@@ -13,12 +13,19 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class SendgridMail() {
 
-	public function __construct($user, $pass, $from, $tomail, $sendylist) {
 
+	public function __construct($from, $tomail, $sendylist) {
+
+		///////////////////
+		// Stuff to set //
+		//////////////////
 		$this->url = 'https://api.sendgrid.com/';
 		$this->sendy = 'https://www.skillcollector.com/sendy/subscribe';
-		$user = $user;
-		$pass = $pass;
+		$this->signature = "<br><br>Enjoy reading!<br><br>Mentor Palokaj<br>https://www.skillcollector.com";
+		$user = SENDGRIDUSER;
+		$pass = SENDGRIDPASS; // Yeah, I know, they really should start using API keys
+
+
 		$this->params = array(
 			'api_user'  => $user,
 			'api_key'   => $pass,
@@ -46,14 +53,11 @@ class SendgridMail() {
 
 		$title = get_the_title($postid);
 		$subject = "Read later: " . $title;
-
-
-		$signature = "<br><br>Enjoy reading!<br><br>Mentor Palokaj<br>https://www.skillcollector.com";
 		$content_post = get_post($postid);
 		$content = $content_post->post_content;
 		$content = apply_filters('the_content', $content);
 		$content = str_replace(']]>', ']]&gt;', $content);
-		$content .= $signature;
+		$content .= $this->signature;
 
 		$this->params = array(
 			'subject'   => $subject,
