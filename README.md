@@ -6,6 +6,12 @@ Note that I'm making this plugin for myself and am initially hard coding paramet
 
 I might make an admin interface with it later.
 
+# Usage
+
+Make sure to set the variables in the PHP class (API stuff and urls).
+
+I make use of a custom field in sendy called 'Remindme' where the post title is stored. Make sure it actually exists :)
+
 #License
 
 Use this as you will. Tweet me as thanks at <a href="https://twitter.com/ActuallyMentorv">@ActuallyMentor</a>.

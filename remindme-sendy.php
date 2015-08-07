@@ -34,10 +34,10 @@ class SendgridMail() {
 			);
 
 		$this->subscribe = array(
-			'name'        => $tomail,
-			'email'   => $tomail,
+			'name'      => $tomail,
+			'email'     => $tomail,
 			'list'      => $sendylist,
-			'boolean'      => true,
+			'boolean'   => true,
 ,			);
 	}
 
