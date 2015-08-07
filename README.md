@@ -2,6 +2,12 @@
 
 I'm trying to make a plugin to send a visitor the article by email, and add them to sendy in the process.
 
+I'm using:
+
+- Sendgrid API
+- Sendy API
+- WordPress (obviously)
+
 ## The goal
 
 Basically I want a user to have the following experience on my blog:
