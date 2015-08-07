@@ -38,7 +38,7 @@ class SendgridMail() {
 			'email'     => $tomail,
 			'list'      => $sendylist,
 			'boolean'   => true,
-,			);
+			);
 	}
 
 	public function inputData($subject, $html, $text) {
