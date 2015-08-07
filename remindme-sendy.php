@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: Empty Plugin
- * Plugin URI: https://github.com/actuallymentor/empty-wordpress-plugin
- * Description: Empty plugin template.
- * Version: 0.0.0
+ * Plugin Name: Send me this article
+ * Plugin URI: https://github.com/actuallymentor/wp-remindme-sendy
+ * Description: Send a visitor the post they are reading, and subscribe them to sendy.
+ * Version: 0.0.1
  * Author: Mentor Palokaj
  * Author URI: https://www.skillcollector.com
- * License: MIT
+ * License: Tweet me for thanks at @ActuallyMentor
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
