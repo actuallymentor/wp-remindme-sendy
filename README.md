@@ -2,9 +2,18 @@
 
 I'm trying to make a plugin to send a visitor the article by email, and add them to sendy in the process.
 
-Note that I'm making this plugin for myself and am initially hard coding parameters into it like my email address ans email signature.
+## The goal
 
-I might make an admin interface with it later.
+Basically I want a user to have the following experience on my blog:
+
+- At the end of the article (floating signup maybe?) there is a 'Read later: Send me this article by email'
+- User fills first name and email
+- Plugin sends post content using sendgrid
+- Plugin signs user up to sendy list
+
+## Status
+
+Dry coding right now, no testing done. Just drafting.
 
 # Usage
 
