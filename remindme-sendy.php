@@ -11,6 +11,22 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// [remindme]
+function remindme_func(){
+	$actorurl = plugins_url('functions/actor.php', __FILE__);
+	?>
+	<form action=<?php echo '"' . $actorurl . '"' ?> >
+		<input type="text" name="toname" placeholder="Name" />
+		<input type="email" name="tomail" placeholder="Email" />
+		<input type="text" name="from" value="YOUREMAIL" hidden>
+		<input type="text" name="list" value="LISTIID" hidden>
+		<input type="text" name="id" value=<?php echo get_the_ID(); ?> hidden>
+		<input type="submit" value="Save to mail">
+	</form>
+	<?php
+}
+add_shortcode( 'remindme', 'remindme_func' );
+
 // Add styles and script
 
 add_action( 'wp_enqueue_scripts', 'add_stylesheet_script' );

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class SendgridMail() {
 
 
-	public function __construct($from, $tomail, $sendylist) {
+	public function __construct($from, $tomail, $toname, $sendylist) {
 
 		///////////////////
 		// Stuff to set //
@@ -25,7 +25,7 @@ class SendgridMail() {
 			);
 
 		$this->subscribe = array(
-			'name'      => $tomail,
+			'name'      => $toname,
 			'email'     => $tomail,
 			'list'      => $sendylist,
 			'boolean'   => true,
