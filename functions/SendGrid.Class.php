@@ -1,8 +1,8 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+// defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
-class SendgridMail() {
+class wprm_SendgridMail {
 
 
 	public function __construct($from, $tomail, $toname, $sendylist) {
