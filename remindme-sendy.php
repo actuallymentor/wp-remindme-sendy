@@ -9,41 +9,63 @@
  * License: Tweet me for thanks at @ActuallyMentor
  */
 
-// Turns WordPress debugging on
-define('WP_DEBUG', true);
 
-// Tells WordPress to log everything to the /wp-content/debug.log file
-define('WP_DEBUG_LOG', true);
+/////////////////////////
+//// Debug
+/////////////////////////
 
-// Doesn't force the PHP 'display_errors' variable to be on
-define('WP_DEBUG_DISPLAY', false);
+$debug_info = array("Debug initiated", "JS Debug");
 
-// Hides errors from being displayed on-screen
-@ini_set('display_errors', 0);
+function debug_to_console($data) {
+	if( is_array($data) || is_object($data) ) {
+		echo("<script>console.log('PHP: ".json_encode($data)."');</script>");
+	} else {
+		echo("<script>console.log('PHP: ".$data."');</script>");
+	}
+} 
+
+
+///////////////////////
+//// Active parts
+//////////////////////
 
 // defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
-require_once (__DIR__ . '/functions/Sendgrid.Class.php');
-require_once (__DIR__ . '/functions/actor.php');
+$wprm_config = include( __DIR__ . '/wprm_vars.php');
+array_push($debug_info, "sendgrid vars loaded");
 
-// [remindme]
+include_once (__DIR__ . '/functions/Sendgrid.Class.php');
+array_push($debug_info, "Loaded sendgrid class");
+
+include_once (__DIR__ . '/functions/actor.php');
+array_push($debug_info, "Loaded actor");
+
+if ( $_GET['debug'] ) {
+	debug_to_console($debug_info);
+}
+
+// [wprm_remindme]
 function wprm_remindme_func(){
+	global $wprm_config;
 	$actorurl = plugins_url('/remindme-sendy.php', __FILE__);
 	?>
-	<form action=<?php echo '"' . $actorurl . '"' ?> >
-		<input type="text" name="wprm_toname" placeholder="Name" />
-		<input type="email" name="wprm_tomail" placeholder="Email" />
-		<input type="text" name="wprm_from" value="YOUREMAIL" hidden>
-		<input type="text" name="wprm_list" value="LISTIID" hidden>
-		<input type="text" name="wprm_forward" value="thanks.html" hidden>
-		<input type="text" name="wprm_id" value=<?php echo get_the_ID(); ?> hidden>
-		<input type="submit" name="wprm_submit" value="Save to mail">
+	<form method="POST" action=<?php echo '"' . $actorurl . '"' ?> >
+		<input type="text" name="toname" placeholder="Name" />
+		<input type="email" name="tomail" placeholder="Email" />
+		<input type="text" name="from" value=<?php echo '"' . $wprm_config['from'] .  '"'; ?> hidden>
+		<input type="text" name="list" value=<?php echo '"' . $wprm_config['listid'] .  '"'; ?> hidden>
+		<input type="text" name="forward" value=<?php echo '"' . $wprm_config['thankyou'] .  '"'; ?> hidden>
+		<input type="text" name="id" value=<?php echo get_the_ID(); ?> hidden>
+		<input type="submit" name="submit" value="Save to mail">
 	</form>
 	<?php
 }
 add_shortcode( 'wprm_remindme', 'wprm_remindme_func' );
 
-// Add styles and script
+
+///////////////////////////
+//// General css and js, might not use
+///////////////////////////
 
 add_action( 'wp_enqueue_scripts', 'wprm_add_stylesheet_script' );
 function wprm_add_stylesheet_script() {

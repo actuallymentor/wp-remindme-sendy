@@ -2,6 +2,7 @@
 
 // defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
+
 class wprm_SendgridMail {
 
 
@@ -13,8 +14,9 @@ class wprm_SendgridMail {
 		$this->url = 'https://api.sendgrid.com/';
 		$this->sendy = 'https://www.skillcollector.com/sendy/subscribe';
 		$this->signature = "<br><br>Enjoy reading!<br><br>Mentor Palokaj<br>https://www.skillcollector.com";
-		$user = SENDGRIDUSER;
-		$pass = SENDGRIDPASS; // Yeah, I know, they really should start using API keys
+		$user = $wprm_config['sendyuser'];
+		$pass = $wprm_config['sendypass']; // Yeah, I know, they really should start using API keys
+		array_push($debug_info, "Constructor: Variables set");
 
 
 		$this->params = array(
@@ -24,12 +26,16 @@ class wprm_SendgridMail {
 			'from'      => $from,
 			);
 
+		array_push($debug_info, "Constructor: Sendparams loaded");
+
 		$this->subscribe = array(
 			'name'      => $toname,
 			'email'     => $tomail,
 			'list'      => $sendylist,
 			'boolean'   => true,
 			);
+
+		array_push($debug_info, "Constructor: Subscribe params loaded");
 	}
 
 	public function inputData($subject, $html, $text) {
@@ -42,6 +48,7 @@ class wprm_SendgridMail {
 
 	public function loadPost($postid) {
 
+		array_push($debug_info, "loadPost: starting content load");
 		$title = get_the_title($postid);
 		$subject = "Read later: " . $title;
 		$content_post = get_post($postid);
@@ -50,18 +57,24 @@ class wprm_SendgridMail {
 		$content = str_replace(']]>', ']]&gt;', $content);
 		$content .= $this->signature;
 
+		array_push($debug_info, "loadPost: content loaded");
+
 		$this->params = array(
 			'subject'   => $subject,
 			'html'      => $content,
 			'text'      => $text,
 			);
+		array_push($debug_info, "loadPost: send params set");
+
 		$this->subscribe = array(
 			'remindme'  => $title,
 			);
+		array_push($debug_info, "loadPost: Subscribe params set");
 	}
 
 	public function sendNow() {
 
+		array_push($debug_info, "sendNow: starting request");
 		$request =  $this->url.'api/mail.send.json';
 
 		// Generate curl request
@@ -79,10 +92,12 @@ class wprm_SendgridMail {
 		// obtain response
 		$this->response = curl_exec($session);
 		curl_close($session);
+		array_push($debug_info, "sendnow: Request completed");
 	}
 
 	public function sendySubscribe() {
 
+		array_push($debug_info, "sendySubscribe: Starting request");
 		$request =  $this->sendy;
 
 		// Generate curl request
@@ -99,7 +114,8 @@ class wprm_SendgridMail {
 
 		// obtain response
 		$this->response = curl_exec($session);
-		curl_close($session);		
+		curl_close($session);
+		array_push($debug_info, "sendySubscribe: Request completed");
 	}
 
 	public function response() {
