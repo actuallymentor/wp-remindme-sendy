@@ -59,7 +59,11 @@ if ( isset( $wprm_from, $wprm_tomail, $wprm_sendylist, $wprm_url, $wprm_forward)
 	///////////////////// Debug //////////////////////
 	if ($_GET['debug']) { echo "Subscribe done, forwarding away." . "<br><br>"; }
 
-	header("Location: $wprm_forward");
+	if ($_GET['debug']) {
+		$wprm_visitor->response();
+	} else {
+		header("Location: $wprm_forward");
+	}
 
 } else {
 	///////////////////// Debug //////////////////////
