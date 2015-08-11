@@ -2,8 +2,9 @@
 
 // defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 return array (
-	'sendyuser' => 'USER',
-	'sendypass' => 'PASS',
+	'sendgriduser' => 'USER',
+	'sendgridpass' => 'PASS',
+	'sendyurl' => 'SENDYURLNOTRAILINGSLASH',
 	'listid' => 'LIST',
 	'from' => 'YOUREMAIL',
 	'thankyou' => 'THANKSURL',

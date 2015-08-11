@@ -29,7 +29,7 @@ function wprm_remindme_func(){
 		<input type="text" name="list" value=<?php echo '"' . $wprm_config['listid'] .  '"'; ?> hidden>
 		<input type="text" name="forward" value=<?php echo '"' . $wprm_config['thankyou'] .  '"'; ?> hidden>
 		<input type="text" name="subject" value=<?php echo '"' . $subject .  '"'; ?> hidden>
-		<input type="text" name="content" value=<?php echo '"' . $wprm_url .  '"'; ?> hidden>
+		<input type="text" name="url" value=<?php echo '"' . $wprm_url .  '"'; ?> hidden>
 		<input type="text" name="title" value=<?php echo '"' . $title .  '"'; ?> hidden>
 		<input type="submit" name="submit" value="Save to mail">
 	</form>

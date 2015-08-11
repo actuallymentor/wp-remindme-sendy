@@ -17,9 +17,9 @@ class wprm_SendgridMail {
 		// Stuff to set //
 		//////////////////
 		$this->url = 'https://api.sendgrid.com/';
-		$this->sendy = 'https://www.skillcollector.com/sendy/subscribe';
-		$user = $wprm_config['sendyuser'];
-		$pass = $wprm_config['sendypass']; // Yeah, I know, they really should start using API keys
+		$this->sendy = $wprm_config['sendyurl'];
+		$user = $wprm_config['sendgriduser'];
+		$pass = $wprm_config['sendgridpass']; // Yeah, I know, they really should start using API keys
 
 		///////////////////// Debug //////////////////////
 		if ($_GET['debug']) { echo "Variables including config array loaded" . "<br><br>"; }
@@ -31,6 +31,7 @@ class wprm_SendgridMail {
 			'from'      => $from,
 			);
 
+
 		///////////////////// Debug //////////////////////
 		if ($_GET['debug']) { echo "Sendgrid params loaded." . "<br><br>"; }
 
@@ -40,6 +41,7 @@ class wprm_SendgridMail {
 			'list'      => $sendylist,
 			'boolean'   => true,
 			);
+
 
 		///////////////////// Debug //////////////////////
 		if ($_GET['debug']) { echo "Sendy subscribe array loaded." . "<br><br>"; }
@@ -55,8 +57,9 @@ class wprm_SendgridMail {
 	}
 
 	public function loadPost($subject, $title, $url) {
+		global $wprm_config;
 
-		$content = 'Hello ' . this->params['name'] . ', <br><br> You asked to be reminded to read the following post: <a href="' . $url . '">' . $title . '.<br><br>If you did not request this email, someone else did it in your name. You can sinply ignore this. <br> <br> Thanks for enjoying skillcollector.com! <br><br>' . $wprm_config['signature'];
+		$content = 'Hello ' . $this->subscribe['name'] . ', <br><br> You asked to be reminded to read the following post: <a href="' . $url . '">' . $title . '.<br><br>If you did not request this email, someone else did it in your name. You can sinply ignore this. <br> <br> Thanks for enjoying skillcollector.com! <br><br>' . $wprm_config['signature'];
 		$this->params = array(
 			'subject'   => $subject,
 			'html'      => $content,
@@ -66,9 +69,7 @@ class wprm_SendgridMail {
 		///////////////////// Debug //////////////////////
 		if ($_GET['debug']) { echo "Post load params loaded." . "<br><br>"; }
 
-		$this->subscribe = array(
-			'remindme'  => $title,
-			);
+		$this->subscribe['remindme']  = $title;
 
 		///////////////////// Debug //////////////////////
 		if ($_GET['debug']) { echo "Subscribe title remindme loaded." . "<br><br>"; }
@@ -107,40 +108,34 @@ class wprm_SendgridMail {
 	}
 
 	public function sendySubscribe() {
-		$request =  $this->sendy;
 
-
-		///////////////////// Debug //////////////////////
-		if ($_GET['debug']) { echo "Starting curl request." . "<br><br>"; }
-
-
-		// Generate curl request
-		$session = curl_init($request);
-		// Tell curl to use HTTP POST
-		curl_setopt ($session, CURLOPT_POST, true);
-		// Tell curl that this is the body of the POST
-		curl_setopt ($session, CURLOPT_POSTFIELDS, $this->subscribe);
-		// Tell curl not to return headers, but do return the response
-		curl_setopt($session, CURLOPT_HEADER, false);
-		// Tell PHP not to use SSLv3 (instead opting for TLS)
-		curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
-		curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-
-		///////////////////// Debug //////////////////////
-		if ($_GET['debug']) { echo "Prepare execution." . "<br><br>"; }
-
-		// obtain response
-		$this->response = curl_exec($session);
-		curl_close($session);
-
-		///////////////////// Debug //////////////////////
-		if ($_GET['debug']) { echo "Curl executed" . "<br><br>"; }
-		
+	//Check fields
+	if( !isset($this->subscribe['name'], $this->subscribe['email']) )
+	{
+		echo 'Please fill in all fields.';
+		exit;
 	}
+	
+	//Subscribe
+	$postdata = http_build_query(
+		$this->subscribe
+		);
 
-	public function response() {
-		print_r($this->response);
-	}
+	///////////////////// Debug //////////////////////
+	if ($_GET['debug']) { echo "Starting request. to " . $this->sendy . "<br><br>"; }
+
+	$opts = array('http' => array('method'  => 'POST', 'header'  => 'Content-type: application/x-www-form-urlencoded', 'content' => $postdata));
+	$context  = stream_context_create($opts);
+	$result = file_get_contents($this->sendy.'/subscribe', false, $context);
+	
+	///////////////////// Debug //////////////////////
+	if ($_GET['debug']) { echo "Request executed" . "<br><br>"; }
+
+}
+
+public function response() {
+	print_r($this->response);
+}
 
 
 
