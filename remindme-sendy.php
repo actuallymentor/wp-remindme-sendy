@@ -21,8 +21,11 @@ function wprm_remindme_func(){
 	$title = get_the_title(get_the_ID());
 	$subject = "Read later: " . $title;
 	$wprm_url = get_permalink(get_the_ID());
+	// Set form token and set it to session
+	$wprm_clean_token = uniqid('auth', true);
+	$wprm_form_token = md5($wprm_clean_token);
 	?>
-	<form method="POST" action=<?php echo '"' . $actorurl . '"' ?> >
+	<form method="POST" action=<?php echo '"' . $actorurl . '?truth=' . $wprm_clean_token . '"'; ?> >
 		<input type="text" name="toname" placeholder="Name" />
 		<input type="email" name="tomail" placeholder="Email" />
 		<input type="text" name="from" value=<?php echo '"' . $wprm_config['from'] .  '"'; ?> hidden>
@@ -31,6 +34,7 @@ function wprm_remindme_func(){
 		<input type="text" name="subject" value=<?php echo '"' . $subject .  '"'; ?> hidden>
 		<input type="text" name="url" value=<?php echo '"' . $wprm_url .  '"'; ?> hidden>
 		<input type="text" name="title" value=<?php echo '"' . $title .  '"'; ?> hidden>
+		<input type="text" name="wprm_form_token" value=<?php echo '"' . $wprm_form_token .  '"'; ?> hidden>
 		<input type="submit" name="submit" value="Save to mail">
 	</form>
 	<?php

@@ -2,6 +2,10 @@
 
 // defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
+if ( !(md5($_GET['truth']) == $_POST['wprm_form_token']) ) {
+	die("Mismatch");
+}
+
 ///////////////////// Debug //////////////////////
 if ($_GET['debug']) { echo "Actor says hello!" . "<br><br>"; }
 
