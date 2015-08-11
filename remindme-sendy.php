@@ -9,45 +9,18 @@
  * License: Tweet me for thanks at @ActuallyMentor
  */
 
-
-/////////////////////////
-//// Debug
-/////////////////////////
-
-$debug_info = array("Debug initiated", "JS Debug");
-
-function debug_to_console($data) {
-	if( is_array($data) || is_object($data) ) {
-		echo("<script>console.log('PHP: ".json_encode($data)."');</script>");
-	} else {
-		echo("<script>console.log('PHP: ".$data."');</script>");
-	}
-} 
-
-
-///////////////////////
-//// Active parts
-//////////////////////
-
 // defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 $wprm_config = include( __DIR__ . '/wprm_vars.php');
-array_push($debug_info, "sendgrid vars loaded");
-
-include_once (__DIR__ . '/functions/Sendgrid.Class.php');
-array_push($debug_info, "Loaded sendgrid class");
-
-include_once (__DIR__ . '/functions/actor.php');
-array_push($debug_info, "Loaded actor");
-
-if ( $_GET['debug'] ) {
-	debug_to_console($debug_info);
-}
 
 // [wprm_remindme]
 function wprm_remindme_func(){
 	global $wprm_config;
-	$actorurl = plugins_url('/remindme-sendy.php', __FILE__);
+	$actorurl = plugins_url('/functions/actor.php', __FILE__);
+
+	$title = get_the_title(get_the_ID());
+	$subject = "Read later: " . $title;
+	$wprm_url = get_permalink(get_the_ID());
 	?>
 	<form method="POST" action=<?php echo '"' . $actorurl . '"' ?> >
 		<input type="text" name="toname" placeholder="Name" />
@@ -55,7 +28,9 @@ function wprm_remindme_func(){
 		<input type="text" name="from" value=<?php echo '"' . $wprm_config['from'] .  '"'; ?> hidden>
 		<input type="text" name="list" value=<?php echo '"' . $wprm_config['listid'] .  '"'; ?> hidden>
 		<input type="text" name="forward" value=<?php echo '"' . $wprm_config['thankyou'] .  '"'; ?> hidden>
-		<input type="text" name="id" value=<?php echo get_the_ID(); ?> hidden>
+		<input type="text" name="subject" value=<?php echo '"' . $subject .  '"'; ?> hidden>
+		<input type="text" name="content" value=<?php echo '"' . $wprm_url .  '"'; ?> hidden>
+		<input type="text" name="title" value=<?php echo '"' . $title .  '"'; ?> hidden>
 		<input type="submit" name="submit" value="Save to mail">
 	</form>
 	<?php

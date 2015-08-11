@@ -2,28 +2,68 @@
 
 // defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
-array_push($debug_info, "Actor: Loading POST");
+///////////////////// Debug //////////////////////
+if ($_GET['debug']) { echo "Actor says hello!" . "<br><br>"; }
+
+
+$wprm_config = include( '../wprm_vars.php');
+
+
+///////////////////// Debug //////////////////////
+if ($_GET['debug']) { echo "COnfig file loaded" . "<br><br>"; }
+
+include_once (__DIR__ . '/Sendgrid.Class.php');
+
+///////////////////// Debug //////////////////////
+if ($_GET['debug']) { echo "Sendgrid class included" . "<br><br>"; }
+
+
+///////////////////// Debug //////////////////////
+if ($_GET['debug']) { echo "Load _post data." . "<br><br>"; }
+
+
 $wprm_from = $_POST['from'];
 $wprm_tomail = $_POST['tomail'];
 $wprm_toname = $_POST['toname'];
 $wprm_sendylist = $_POST['list'];
-$wprm_id = $_POST['id'];
+$wprm_subject = $_POST['subject'];
+$wprm_url = $_POST['url'];
+$wprm_title = $_POST['title'];
 $wprm_forward = $_POST['forward'];
 
-array_push($debug_info, "Actor: Checking if vars are set");
-if ( isset( $wprm_from, $wprm_tomail, $wprm_sendylist, $wprm_id, $wprm_forward) ) {
-	array_push($debug_info, "Actor: Vars set, making instance");
+///////////////////// Debug //////////////////////
+if ($_GET['debug']) { echo "_Post data loaded. Starting if." . "<br><br>"; }
+
+
+if ( isset( $wprm_from, $wprm_tomail, $wprm_sendylist, $wprm_url, $wprm_forward) ) {
+	///////////////////// Debug //////////////////////
+	if ($_GET['debug']) { echo "Start instance creation." . "<br><br>"; }
+
 	$wprm_visitor = new wprm_SendgridMail($wprm_from, $wprm_tomail, $wprm_toname, $wprm_sendylist);
-	array_push($debug_info, "Actor: instance made");
-	$wprm_visitor->loadPost($id);
-	array_push($debug_info, "Actor: Data loaded");
+
+	///////////////////// Debug //////////////////////
+	if ($_GET['debug']) { echo "Instance made, doing loadPost." . "<br><br>"; }
+
+	$wprm_visitor->loadPost($wprm_subject, $wprm_title, $wprm_url);
+
+	///////////////////// Debug //////////////////////
+	if ($_GET['debug']) { echo "Loadpost done, doing sendNow()." . "<br><br>"; }
+
 	$wprm_visitor->sendNow();
-	array_push($debug_info, "Actor: Send executed");
+
+	///////////////////// Debug //////////////////////
+	if ($_GET['debug']) { echo "Sendnow done, starting subscribe." . "<br><br>"; }
+
 	$wprm_visitor->sendySubscribe();
-	array_push($debug_info, "Actor: subscribe executed");
+
+	///////////////////// Debug //////////////////////
+	if ($_GET['debug']) { echo "Subscribe done, forwarding away." . "<br><br>"; }
 
 	header("Location: $forward");
 
+} else {
+	///////////////////// Debug //////////////////////
+	if ($_GET['debug']) { echo "Not enough variables." . "<br><br>"; }
 }
 
 ?>

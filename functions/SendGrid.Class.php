@@ -5,19 +5,24 @@
 
 class wprm_SendgridMail {
 
-
 	public function __construct($from, $tomail, $toname, $sendylist) {
+
+
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Start constructor" . "<br><br>"; }
+
+		global $wprm_config;
 
 		///////////////////
 		// Stuff to set //
 		//////////////////
 		$this->url = 'https://api.sendgrid.com/';
 		$this->sendy = 'https://www.skillcollector.com/sendy/subscribe';
-		$this->signature = "<br><br>Enjoy reading!<br><br>Mentor Palokaj<br>https://www.skillcollector.com";
 		$user = $wprm_config['sendyuser'];
 		$pass = $wprm_config['sendypass']; // Yeah, I know, they really should start using API keys
-		array_push($debug_info, "Constructor: Variables set");
 
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Variables including config array loaded" . "<br><br>"; }
 
 		$this->params = array(
 			'api_user'  => $user,
@@ -26,7 +31,8 @@ class wprm_SendgridMail {
 			'from'      => $from,
 			);
 
-		array_push($debug_info, "Constructor: Sendparams loaded");
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Sendgrid params loaded." . "<br><br>"; }
 
 		$this->subscribe = array(
 			'name'      => $toname,
@@ -35,7 +41,9 @@ class wprm_SendgridMail {
 			'boolean'   => true,
 			);
 
-		array_push($debug_info, "Constructor: Subscribe params loaded");
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Sendy subscribe array loaded." . "<br><br>"; }
+
 	}
 
 	public function inputData($subject, $html, $text) {
@@ -46,36 +54,33 @@ class wprm_SendgridMail {
 			);
 	}
 
-	public function loadPost($postid) {
+	public function loadPost($subject, $title, $url) {
 
-		array_push($debug_info, "loadPost: starting content load");
-		$title = get_the_title($postid);
-		$subject = "Read later: " . $title;
-		$content_post = get_post($postid);
-		$content = $content_post->post_content;
-		$content = apply_filters('the_content', $content);
-		$content = str_replace(']]>', ']]&gt;', $content);
-		$content .= $this->signature;
-
-		array_push($debug_info, "loadPost: content loaded");
-
+		$content = 'Hello ' . this->params['name'] . ', <br><br> You asked to be reminded to read the following post: <a href="' . $url . '">' . $title . '.<br><br>If you did not request this email, someone else did it in your name. You can sinply ignore this. <br> <br> Thanks for enjoying skillcollector.com! <br><br>' . $wprm_config['signature'];
 		$this->params = array(
 			'subject'   => $subject,
 			'html'      => $content,
-			'text'      => $text,
+			'text'      => '',
 			);
-		array_push($debug_info, "loadPost: send params set");
+
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Post load params loaded." . "<br><br>"; }
 
 		$this->subscribe = array(
 			'remindme'  => $title,
 			);
-		array_push($debug_info, "loadPost: Subscribe params set");
+
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Subscribe title remindme loaded." . "<br><br>"; }
+
+
 	}
 
 	public function sendNow() {
-
-		array_push($debug_info, "sendNow: starting request");
 		$request =  $this->url.'api/mail.send.json';
+
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Starting curl request." . "<br><br>"; }
 
 		// Generate curl request
 		$session = curl_init($request);
@@ -89,16 +94,25 @@ class wprm_SendgridMail {
 		curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
 		curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Prepare execution." . "<br><br>"; }
+
 		// obtain response
 		$this->response = curl_exec($session);
 		curl_close($session);
-		array_push($debug_info, "sendnow: Request completed");
+
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Curl executed" . "<br><br>"; }
+
 	}
 
 	public function sendySubscribe() {
-
-		array_push($debug_info, "sendySubscribe: Starting request");
 		$request =  $this->sendy;
+
+
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Starting curl request." . "<br><br>"; }
+
 
 		// Generate curl request
 		$session = curl_init($request);
@@ -112,10 +126,16 @@ class wprm_SendgridMail {
 		curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
 		curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Prepare execution." . "<br><br>"; }
+
 		// obtain response
 		$this->response = curl_exec($session);
 		curl_close($session);
-		array_push($debug_info, "sendySubscribe: Request completed");
+
+		///////////////////// Debug //////////////////////
+		if ($_GET['debug']) { echo "Curl executed" . "<br><br>"; }
+		
 	}
 
 	public function response() {
