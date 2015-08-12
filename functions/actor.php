@@ -2,9 +2,15 @@
 
 // defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
-if ( !(md5($_GET['truth']) == $_POST['wprm_form_token']) ) {
-	die("Mismatch");
+if(!session_id()) {
+	session_start();
 }
+
+if ( !($_SESSION['wprm_form_token'] == $_POST['wprm_form_token']) ) {
+	die("Mismatch");
+	session_destroy();
+}
+session_destroy();
 
 ///////////////////// Debug //////////////////////
 if ($_GET['debug']) { echo "Actor says hello!" . "<br><br>"; }

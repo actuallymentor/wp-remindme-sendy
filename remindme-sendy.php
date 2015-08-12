@@ -21,11 +21,18 @@ function wprm_remindme_func(){
 	$title = get_the_title(get_the_ID());
 	$subject = "Read later: " . $title;
 	$wprm_url = get_permalink(get_the_ID());
-	// Set form token and set it to session
-	$wprm_clean_token = uniqid('auth', true);
-	$wprm_form_token = md5($wprm_clean_token);
+
+	//Form spam control and debug declaration
+	if(!session_id()) {
+        session_start();
+    }
+	$wprm_form_token = md5(uniqid('auth', true));
+	$_SESSION['wprm_form_token'] = $wprm_form_token;
+	if ($_GET['debug'] == true) {
+		$wprm_debug .= '?debug=true';
+	}
 	?>
-	<form method="POST" action=<?php echo '"' . $actorurl . '?truth=' . $wprm_clean_token . '"'; ?> >
+	<form method="POST" action=<?php echo '"' . $actorurl . $wprm_debug . '"'; ?> >
 		<input type="text" name="toname" placeholder="Name" />
 		<input type="email" name="tomail" placeholder="Email" />
 		<input type="text" name="from" value=<?php echo '"' . $wprm_config['from'] .  '"'; ?> hidden>
