@@ -48,14 +48,6 @@ class wprm_SendgridMail {
 
 	}
 
-	public function inputData($subject, $html, $text) {
-		$this->params = array(
-			'subject'   => $subject,
-			'html'      => $html,
-			'text'      => $text,
-			);
-	}
-
 	public function loadPost($subject, $title, $url) {
 		global $wprm_config;
 
@@ -75,7 +67,7 @@ class wprm_SendgridMail {
 
 	}
 
-	public function sendNow() {
+	public function sendGrid() {
 		$request =  $this->url.'api/mail.send.json';
 
 		///////////////////// Debug //////////////////////

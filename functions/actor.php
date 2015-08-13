@@ -59,7 +59,7 @@ if ( isset( $wprm_from, $wprm_tomail, $wprm_sendylist, $wprm_url, $wprm_forward)
 	///////////////////// Debug //////////////////////
 	if ($_GET['debug']) { echo "Loadpost done, doing sendNow()." . "<br><br>"; }
 
-	$wprm_visitor->sendNow();
+	$wprm_visitor->sendGrid();
 
 	///////////////////// Debug //////////////////////
 	if ($_GET['debug']) { echo "Sendnow done, starting subscribe." . "<br><br>"; }
@@ -79,5 +79,7 @@ if ( isset( $wprm_from, $wprm_tomail, $wprm_sendylist, $wprm_url, $wprm_forward)
 	///////////////////// Debug //////////////////////
 	if ($_GET['debug']) { echo "Not enough variables." . "<br><br>"; }
 }
+
+unset($wprm_visitor);
 
 ?>
