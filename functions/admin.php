@@ -7,13 +7,13 @@ function wprm_menu() {
 }
 
 function register_wprm_settings() { // whitelist options
-	register_setting( 'wprm_settings', 'sendgriduser' );
-	register_setting( 'wprm_settings', 'sendgridpass' );
-	register_setting( 'wprm_settings', 'sendyurl' );
-	register_setting( 'wprm_settings', 'listid' );
-	register_setting( 'wprm_settings', 'from' );
-	register_setting( 'wprm_settings', 'thankyou' );
-	register_setting( 'wprm_settings', 'signature' );
+	register_setting( 'wprm_settings', 'wprm_sendgriduser' );
+	register_setting( 'wprm_settings', 'wprm_sendgridpass' );
+	register_setting( 'wprm_settings', 'wprm_sendyurl' );
+	register_setting( 'wprm_settings', 'wprm_listid' );
+	register_setting( 'wprm_settings', 'wprm_from' );
+	register_setting( 'wprm_settings', 'wprm_thankyou' );
+	register_setting( 'wprm_settings', 'wprm_signature' );
 }
 
 function wprm_options() {
@@ -28,19 +28,19 @@ function wprm_options() {
 			<?php settings_fields( 'wprm_settings' ); ?>
 			<?php do_settings_sections( 'wprm_settings' ); ?>
 			<p>Sendgrid username:</p>
-			<input type="text" name="sendgriduser" value="<?php echo esc_attr( get_option('sendgriduser') ); ?>" />
+			<input type="text" name="wprm_sendgriduser" value="<?php echo esc_attr( get_option('wprm_sendgriduser') ); ?>" />
 			<p>Sendgrid password:</p>
-			<input type="password" name="sendgridpass" value="<?php echo esc_attr( get_option('sendgridpass') ); ?>" />
+			<input type="password" name="wprm_sendgridpass" value="<?php echo esc_attr( get_option('wprm_sendgridpass') ); ?>" />
 			<p>Sendy installation URL (no trailing slash):</p>
-			<input type="text" name="sendyurl" value="<?php echo esc_attr( get_option('sendyurl') ); ?>" />
+			<input type="text" name="wprm_sendyurl" value="<?php echo esc_attr( get_option('wprm_sendyurl') ); ?>" />
 			<p>Sendy list ID:</p>
-			<input type="text" name="listid" value="<?php echo esc_attr( get_option('listid') ); ?>" />
+			<input type="text" name="wprm_listid" value="<?php echo esc_attr( get_option('wprm_listid') ); ?>" />
 			<p>From email address:</p>
-			<input type="text" name="from" value="<?php echo esc_attr( get_option('from') ); ?>" />
+			<input type="text" name="wprm_from" value="<?php echo esc_attr( get_option('wprm_from') ); ?>" />
 			<p>Thank you URL:</p>
-			<input type="text" name="thankyou" value="<?php echo esc_attr( get_option('thankyou') ); ?>" />
+			<input type="text" name="wprm_thankyou" value="<?php echo esc_attr( get_option('wprm_thankyou') ); ?>" />
 			<p>Email signature (in HTML):</p>
-			<input type="text" name="signature" value="<?php echo esc_attr( get_option('signature') ); ?>" />
+			<input type="text" name="wprm_signature" value="<?php echo esc_attr( get_option('wprm_signature') ); ?>" />
 			<?php submit_button(); ?>
 		</form>
 	</div>
