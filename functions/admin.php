@@ -14,6 +14,7 @@ function register_wprm_settings() { // whitelist options
 	register_setting( 'wprm_settings', 'wprm_from' );
 	register_setting( 'wprm_settings', 'wprm_thankyou' );
 	register_setting( 'wprm_settings', 'wprm_signature' );
+	register_setting( 'wprm_settings', 'wprm_printcss' );
 }
 
 function wprm_options() {
@@ -24,7 +25,7 @@ function wprm_options() {
 	<div class="wrap">
 		<h2>WPRM - WordPress Remind Me Plugin</h2>
 		<p>Here is where the form would go if I actually had options.</p>
-		<form method="post" action="options.php"> 
+		<form class="wprm_admin" id="wprm_form" method="post" action="options.php"> 
 			<?php settings_fields( 'wprm_settings' ); ?>
 			<?php do_settings_sections( 'wprm_settings' ); ?>
 			<p>Sendgrid username:</p>
@@ -36,11 +37,13 @@ function wprm_options() {
 			<p>Sendy list ID:</p>
 			<input type="text" name="wprm_listid" value="<?php echo esc_attr( get_option('wprm_listid') ); ?>" />
 			<p>From email address:</p>
-			<input type="text" name="wprm_from" value="<?php echo esc_attr( get_option('wprm_from') ); ?>" />
+			<input type="email" name="wprm_from" value="<?php echo esc_attr( get_option('wprm_from') ); ?>" />
 			<p>Thank you URL:</p>
-			<input type="text" name="wprm_thankyou" value="<?php echo esc_attr( get_option('wprm_thankyou') ); ?>" />
+			<input type="url" name="wprm_thankyou" value="<?php echo esc_attr( get_option('wprm_thankyou') ); ?>" />
 			<p>Email signature (in HTML):</p>
-			<input type="text" name="wprm_signature" value="<?php echo esc_attr( get_option('wprm_signature') ); ?>" />
+			<textarea form="wprm_form" name="wprm_signature"><?php echo esc_attr( get_option('wprm_signature') ); ?></textarea>
+			<p>Print friendly CSS:</p>
+			<textarea form="wprm_form" name="wprm_printcss"><?php echo esc_attr( get_option('wprm_printcss') ); ?></textarea>
 			<?php submit_button(); ?>
 		</form>
 	</div>

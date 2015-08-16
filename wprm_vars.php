@@ -9,6 +9,7 @@ return array (
 	'from' => get_option('wprm_from'),
 	'thankyou' => get_option('wprm_thankyou'),
 	'signature' => get_option('wprm_signature'),
+	'printcss' => get_option('wprm_printcss'),
 	);
 
 ?>

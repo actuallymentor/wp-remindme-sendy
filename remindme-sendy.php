@@ -16,18 +16,17 @@ $wprm_config = include( __DIR__ . '/wprm_vars.php');
 include( __DIR__ . '/functions/shortcode.php');
 
 if ( is_admin() ){
+
+	/////////////////////////
+	//// options page
+	/////////////////////////
 	include( __DIR__ . '/functions/admin.php');
 }
 
-///////////////////////////
-//// General css and js, might not use
-///////////////////////////
+////////////////
+//// Admin and print css
+////////////////
 
-add_action( 'wp_enqueue_scripts', 'wprm_add_stylesheet_script' );
-function wprm_add_stylesheet_script() {
-	wp_enqueue_style( 'prefix-style', plugins_url('styles.css', __FILE__) );
-	wp_enqueue_style( 'prefix-style', plugins_url('scripts.js', __FILE__) );
-}
-
+include( __DIR__ . '/functions/css.php');
 
 ?>
