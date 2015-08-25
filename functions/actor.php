@@ -16,9 +16,6 @@ session_destroy();
 if ($_GET['debug']) { echo "Actor says hello!" . "<br><br>"; }
 
 
-$wprm_config = include( '../wprm_vars.php');
-
-
 ///////////////////// Debug //////////////////////
 if ($_GET['debug']) { echo "Config file loaded" . "<br><br>"; }
 

@@ -2,7 +2,7 @@
 // [wprm_remindme]
 function wprm_remindme_func(){
 	global $wprm_config;
-	$actorurl = plugins_url('/functions/actor.php', __FILE__);
+	$actorurl = plugins_url('/actor.php', __FILE__);
 
 	$title = get_the_title(get_the_ID());
 	$subject = "Read later: " . $title;
@@ -15,10 +15,10 @@ function wprm_remindme_func(){
 	$wprm_form_token = md5(uniqid('auth', true));
 	$_SESSION['wprm_form_token'] = $wprm_form_token;
 	if ($_GET['debug'] == true) {
-		$wprm_debug .= '?debug=true';
+		$actorurl .= '?debug=true';
 	}
 
-	$wprm_return = 	'<form id="wprm_form" method="POST" action="' . $actorurl . $wprm_debug . '">
+	$wprm_return = 	'<form id="wprm_form" method="POST" action="' . $actorurl . '">
 	<input type="text" name="toname" placeholder="Name" />
 	<input type="email" name="tomail" placeholder="Email" />
 	<input type="text" name="from" value="' . $wprm_config['from'] . '" hidden>

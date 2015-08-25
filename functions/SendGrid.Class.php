@@ -13,6 +13,8 @@ class wprm_SendgridMail {
 
 		global $wprm_config;
 
+		if ($_GET['debug']) { print_r($wprm_config); }
+
 		///////////////////
 		// Stuff to set //
 		//////////////////
