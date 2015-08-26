@@ -15,11 +15,12 @@ session_destroy();
 ///////////////////// Debug //////////////////////
 if ($_GET['debug']) { echo "Actor says hello!" . "<br><br>"; }
 
+$wprm_config = include( '../wprm_vars.php');
 
 ///////////////////// Debug //////////////////////
 if ($_GET['debug']) { echo "Config file loaded" . "<br><br>"; }
 
-include_once (__DIR__ . '/Sendgrid.Class.php');
+include_once (__DIR__ . '/SendGrid.Class.php');
 
 ///////////////////// Debug //////////////////////
 if ($_GET['debug']) { echo "Sendgrid class included" . "<br><br>"; }
