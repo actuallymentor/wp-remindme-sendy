@@ -15,6 +15,7 @@ function register_wprm_settings() { // whitelist options
 	register_setting( 'wprm_settings', 'wprm_thankyou' );
 	register_setting( 'wprm_settings', 'wprm_signature' );
 	register_setting( 'wprm_settings', 'wprm_printcss' );
+	register_setting( 'wprm_settings', 'wprm_downloadpdf' );
 }
 
 function wprm_options() {
@@ -44,6 +45,11 @@ function wprm_options() {
 			<textarea form="wprm_form" name="wprm_signature"><?php echo esc_attr( get_option('wprm_signature') ); ?></textarea>
 			<p>Print friendly CSS:</p>
 			<textarea form="wprm_form" name="wprm_printcss"><?php echo esc_attr( get_option('wprm_printcss') ); ?></textarea>
+			<p>Download as PDF:</p>
+			<select form="wprm_form" name ="wprm_downloadpdf" value="<?php echo esc_attr( get_option('wprm_downloadpdf') ); ?>">
+				<option value="true">Yes</option>
+				<option value="false">No</option>
+			</select>
 			<?php submit_button(); ?>
 		</form>
 	</div>
