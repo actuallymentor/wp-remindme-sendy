@@ -36,9 +36,9 @@ function print_me (  ) {
 	?>
 	<script>
 		$(document).ready(function(){
-			setInterval(function(){
+			setTimeout(function(){
 				console.log ( 'printing pdf' ); 
-				window.location='//pdfcrowd.com/url_to_pdf/?height=-1';
+				$(location).attr('href', '//pdfcrowd.com/url_to_pdf/?height=-1');
 			},3000); });
 	</script>
 	<?php 
