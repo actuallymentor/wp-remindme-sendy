@@ -52,7 +52,7 @@ class wprm_SendgridMail {
 
 	public function loadPost($subject, $title, $url) {
 		global $wprm_config;
-		$content = 'Hello ' . $this->subscribe['name'] . ', <br><br> You asked to be reminded to read the following post: <a href="' . $url . '">' . $title . '</a>.<br><br>If you did not request this email, someone else did it in your name. You can sinply ignore this. <br> <br> Thanks for enjoying skillcollector.com! <br><br>' . $wprm_config['signature'];
+		$content = 'Hello ' . $this->subscribe['name'] . ', <br><br> You asked to be reminded to read the following post: <a href="' . $url . '">' . $title . '</a>.<br><br>If you did not request this email, someone else did it in your name. You can sinply ignore this. <br><br>' . $wprm_config['signature'];
 		$this->params['subject'] = $subject;
 		$this->params['html'] = $content;
 		$this->params['text'] = '';

@@ -9,11 +9,13 @@
  * License: Tweet me for thanks at @ActuallyMentor
  */
 
-defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+// defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 $wprm_config = include( __DIR__ . '/wprm_vars.php');
 
 include( __DIR__ . '/functions/shortcode.php');
+
+include( __DIR__ . '/functions/actor.php');
 
 if ( is_admin() ){
 
@@ -28,13 +30,5 @@ if ( is_admin() ){
 ////////////////
 
 include( __DIR__ . '/functions/css.php');
-
-if  ( $_GET['wprm_print'] && $wprm_config['downloadpdf'] ) {
- ?>
- 	<script>
- 		window.location='//pdfcrowd.com/url_to_pdf/?height=-1';
- 	</script>
- <?php 
-}
 
 ?>

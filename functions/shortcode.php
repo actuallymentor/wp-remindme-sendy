@@ -2,11 +2,10 @@
 // [wprm_remindme]
 function wprm_remindme_func(){
 	global $wprm_config;
-	$actorurl = plugins_url('/actor.php', __FILE__);
-
 	$title = get_the_title(get_the_ID());
 	$subject = "Read later: " . $title;
 	$wprm_url = get_permalink(get_the_ID());
+	$actorurl = '#wprm_done';
 
 	//Form spam control and debug declaration
 	if(!session_id()) {
@@ -18,9 +17,11 @@ function wprm_remindme_func(){
 		$actorurl .= '?debug=true';
 	}
 
+
 	$wprm_return = 	'<form id="wprm_form" method="POST" action="' . $actorurl . '">
 	<input type="text" name="toname" placeholder="Name" />
 	<input type="email" name="tomail" placeholder="Email" />
+	<input type="text" name="wprm_remindme" value="true" hidden />
 	<input type="text" name="from" value="' . $wprm_config['from'] . '" hidden>
 	<input type="text" name="list" value="'. $wprm_config['listid'] .  '" hidden>
 	<input type="text" name="forward" value="' . $wprm_config['thankyou'] .  '" hidden>
@@ -28,8 +29,12 @@ function wprm_remindme_func(){
 	<input type="text" name="url" value="' . $wprm_url .  '" hidden>
 	<input type="text" name="title" value="' . $title .  '" hidden>
 	<input type="text" name="wprm_form_token" value="' . $wprm_form_token .  '" hidden>
-	<input type="submit" name="submit" value="Save to mail">
-</form>';
+	<input id="wprm_submit" type="submit" name="submit" value="Save to mail">
+	</form>';
+
+if ( isset($_POST['wprm_remindme'])) {
+	$wprm_return = '<a name="wprm_done"></a><br><br><h3>Your reminder has been sent!</h3>';
+}
 
 
 return $wprm_return;

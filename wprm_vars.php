@@ -2,9 +2,6 @@
 
 // defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
-define('WP_USE_THEMES', false);
-include_once( $_SERVER['DOCUMENT_ROOT'] . '/wp-blog-header.php');
-
 return array (
 	'sendgriduser' => get_option('wprm_sendgriduser'),
 	'sendgridpass' => get_option('wprm_sendgridpass'),
@@ -14,7 +11,6 @@ return array (
 	'thankyou' => get_option('wprm_thankyou'),
 	'signature' => get_option('wprm_signature'),
 	'printcss' => get_option('wprm_printcss'),
-	'downloadpdf' => get_option('wprm_downloadpdf'),
 	);
 
 ?>
