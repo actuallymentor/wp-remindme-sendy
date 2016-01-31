@@ -31,7 +31,8 @@ if ( is_admin() ){
 
 include( __DIR__ . '/functions/css.php');
 
-if  ( $_GET['wprm_print'] && $wprm_config['downloadpdf'] ) {
+function print_me (  ) {
+
 	?>
 	<script>
 		$(document).ready(function(){
@@ -40,6 +41,11 @@ if  ( $_GET['wprm_print'] && $wprm_config['downloadpdf'] ) {
 			},3000); });
 	</script>
 	<?php 
+
+}
+
+if  ( $_GET['wprm_print'] && $wprm_config['downloadpdf'] ) {
+	add_action( 'wp_footer', 'print_me' );
 }
 
 ?>
