@@ -31,4 +31,12 @@ if ( is_admin() ){
 
 include( __DIR__ . '/functions/css.php');
 
+if  ( $_GET['wprm_print'] && $wprm_config['downloadpdf'] ) {
+ ?>
+ 	<script>
+ 		window.location='//pdfcrowd.com/url_to_pdf/?height=-1';
+ 	</script>
+ <?php 
+}
+
 ?>

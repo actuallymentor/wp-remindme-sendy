@@ -11,6 +11,7 @@ return array (
 	'thankyou' => get_option('wprm_thankyou'),
 	'signature' => get_option('wprm_signature'),
 	'printcss' => get_option('wprm_printcss'),
+	'downloadpdf' => get_option('wprm_downloadpdf'),
 	);
 
 ?>
