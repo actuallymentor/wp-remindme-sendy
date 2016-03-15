@@ -5,6 +5,7 @@ function wprm_remindme_func(){
 	$title = get_the_title(get_the_ID());
 	$subject = "Read later: " . $title;
 	$wprm_url = get_permalink(get_the_ID());
+	$wprm_url .= '?wprm_print=true';
 	$actorurl = '#wprm_done';
 
 	//Form spam control and debug declaration
