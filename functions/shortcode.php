@@ -20,7 +20,7 @@ function wprm_remindme_func(){
 
 
 	$wprm_return = 	'<form id="wprm_form" method="POST" action="' . $actorurl . '">
-	<input type="text" name="toname" placeholder="Name" />
+	<!-- <input type="text" name="toname" placeholder="Name" /> -->
 	<input type="email" name="tomail" placeholder="Email" />
 	<input type="text" name="wprm_remindme" value="true" hidden />
 	<input type="text" name="from" value="' . $wprm_config['from'] . '" hidden>
@@ -30,7 +30,7 @@ function wprm_remindme_func(){
 	<input type="text" name="url" value="' . $wprm_url .  '" hidden>
 	<input type="text" name="title" value="' . $title .  '" hidden>
 	<input type="text" name="wprm_form_token" value="' . $wprm_form_token .  '" hidden>
-	<input id="wprm_submit" type="submit" name="submit" value="Save to mail">
+	<input class="btn" id="wprm_submit" type="submit" name="submit" value="Send PDF">
 	</form>';
 
 if ( isset($_POST['wprm_remindme'])) {
