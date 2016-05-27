@@ -21,7 +21,7 @@ function wprm_remindme_func(){
 
 	$wprm_return = 	'<form id="wprm_form" method="POST" action="' . $actorurl . '">
 	<!-- <input type="text" name="toname" placeholder="Name" /> -->
-	<input type="email" name="tomail" placeholder="Email" />
+	<input id="wprmemail" type="email" name="tomail" placeholder="Email" />
 	<input type="text" name="wprm_remindme" value="true" hidden />
 	<input type="text" name="from" value="' . $wprm_config['from'] . '" hidden>
 	<input type="text" name="list" value="'. $wprm_config['listid'] .  '" hidden>
