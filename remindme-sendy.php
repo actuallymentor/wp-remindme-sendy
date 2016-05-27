@@ -35,7 +35,8 @@ function print_me (  ) {
 
 	?>
 	<script>
-		$(document).ready(function(){
+		document.addEventListener("DOMContentLoaded", function(event) { 
+			console.log ( 'PDF timer triggered' ) 
 			setTimeout(function(){
 				console.log ( 'printing pdf' ); 
 				$(location).attr('href', '//pdfcrowd.com/url_to_pdf/?height=-1');
