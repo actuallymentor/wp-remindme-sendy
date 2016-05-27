@@ -27,6 +27,8 @@ Make sure to set the variables in the PHP class (API stuff and urls).
 
 I make use of a custom field in sendy called 'Remindme' where the post title is stored. Make sure it actually exists :)
 
+To show the signup form use shortcode [wprm_remindme]
+
 #License
 
 Use this as you will. Tweet me as thanks at <a href="https://twitter.com/ActuallyMentorv">@ActuallyMentor</a>.
