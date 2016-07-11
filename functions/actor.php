@@ -7,10 +7,10 @@ function wprm_actor () {
 		session_start();
 	}
 
-	if ( !($_SESSION['wprm_form_token'] == $_POST['wprm_form_token']) ) {
-		die("Mismatch");
-		session_destroy();
-	}
+	// if ( !($_SESSION['wprm_form_token'] == $_POST['wprm_form_token']) ) {
+	// 	die("Mismatch");
+	// 	session_destroy();
+	// }
 	session_destroy();
 
 ///////////////////// Debug //////////////////////
