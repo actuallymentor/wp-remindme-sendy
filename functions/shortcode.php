@@ -6,7 +6,7 @@ function wprm_remindme_func(){
 	$subject = "Read later: " . $title;
 	$wprm_url = get_permalink(get_the_ID());
 	$wprm_url .= '?wprm_print=true';
-	$actorurl = $wprm_config['https://www.skillcollector.com/sendy'];
+	$actorurl = 'https://www.skillcollector.com/sendy';
 
 	//Form spam control and debug declaration
 	if(!session_id()) {
