@@ -45,7 +45,7 @@ class wprm_SendgridMail {
 
 		///////////////////// Debug //////////////////////
 		if ($_GET['debug']) { echo "Sendy subscribe array loaded." . "<br><br>"; }
-		if ($_GET['debug']) { print_r($this->subscribe); }
+		// if ($_GET['debug']) { print_r($this->subscribe); }
 
 	}
 
