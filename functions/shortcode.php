@@ -6,7 +6,7 @@ function wprm_remindme_func(){
 	$subject = "Read later: " . $title;
 	$wprm_url = get_permalink(get_the_ID());
 	$wprm_url .= '?wprm_print=true';
-	$actorurl = '#wprm_done';
+	$actorurl = '?wprm_done=true';
 
 	//Form spam control and debug declaration
 	if(!session_id()) {
@@ -15,7 +15,7 @@ function wprm_remindme_func(){
 	$wprm_form_token = md5(uniqid('auth', true));
 	$_SESSION['wprm_form_token'] = $wprm_form_token;
 	if ($_GET['debug'] == true) {
-		$actorurl .= '?debug=true';
+		$actorurl .= '&debug=true';
 	}
 
 

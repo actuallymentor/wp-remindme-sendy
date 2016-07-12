@@ -15,8 +15,9 @@ $wprm_config = include( __DIR__ . '/wprm_vars.php');
 
 include( __DIR__ . '/functions/shortcode.php');
 
-include( __DIR__ . '/functions/actor.php');
-
+if( $_GET['wprm_done'] ) {
+	include( __DIR__ . '/functions/actor.php');
+}
 if ( is_admin() ){
 
 	/////////////////////////
