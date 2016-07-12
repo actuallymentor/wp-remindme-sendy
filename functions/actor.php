@@ -16,7 +16,7 @@ function wprm_actor () {
 ///////////////////// Debug //////////////////////
 	if ($_GET['debug']) { echo "Actor says hello!" . "<br><br>"; }
 
-	$wprm_config = include_once( '../wprm_vars.php');
+	$wprm_config = include_once( __DIR__ . '/../wprm_vars.php');
 
 ///////////////////// Debug //////////////////////
 	if ($_GET['debug']) { echo "Config file loaded" . "<br><br>"; }
@@ -39,6 +39,10 @@ function wprm_actor () {
 	$wprm_url = $_POST['url'];
 	$wprm_title = $_POST['title'];
 	$wprm_forward = $_POST['forward'];
+	$wprm_alldata = print_r( $_POST, true )
+
+	///////////////////// Debug //////////////////////
+	if ($_GET['debug']) { echo "Post data is <pre>" . $wprm_alldata . "</pre><br><br>"; }
 
 ///////////////////// Debug //////////////////////
 	if ($_GET['debug']) { echo "_Post data loaded. Starting if." . "<br><br>"; }

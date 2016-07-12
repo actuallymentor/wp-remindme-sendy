@@ -18,7 +18,6 @@ function wprm_remindme_func(){
 		$actorurl .= '&debug=true';
 	}
 
-
 	$wprm_return = 	'<form id="wprm_form" method="POST" action="' . $actorurl . '">
 	<!-- <input type="text" name="toname" placeholder="Name" /> -->
 	<input id="wprmemail" type="email" name="tomail" placeholder="Email" />
