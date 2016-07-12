@@ -1,5 +1,7 @@
 <?php
 
+if ($_GET['debug']) { echo "Actor says early hello!" . "<br><br>"; }
+
 // defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 function wprm_actor () {
 
