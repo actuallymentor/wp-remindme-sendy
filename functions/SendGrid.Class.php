@@ -13,8 +13,6 @@ class wprm_SendgridMail {
 
 		global $wprm_config;
 
-		if ($_GET['debug']) { print_r($wprm_config); }
-
 		///////////////////
 		// Stuff to set //
 		//////////////////
@@ -47,6 +45,7 @@ class wprm_SendgridMail {
 
 		///////////////////// Debug //////////////////////
 		if ($_GET['debug']) { echo "Sendy subscribe array loaded." . "<br><br>"; }
+		if ($_GET['debug']) { print_r($this); }
 
 	}
 
