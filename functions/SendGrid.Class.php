@@ -100,7 +100,7 @@ class wprm_SendgridMail {
 	public function sendySubscribe() {
 
 	//Check fields
-	if( !isset($toname, $tomail) )
+	if( !isset($this->subscribe['name'], $this->subscribe['email']) )
 	{
 		echo 'Please fill in all fields.';
 		exit;
@@ -108,12 +108,7 @@ class wprm_SendgridMail {
 	
 	//Subscribe
 	$postdata = http_build_query(
-		array(
-			'name'      => $toname,
-			'email'     => $tomail,
-			'list'      => $sendylist,
-			'boolean'   => true,
-			)
+		$this->subscribe
 		);
 
 	///////////////////// Debug //////////////////////
